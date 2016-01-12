@@ -117,9 +117,7 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
         String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
 
         // App may crash here if no book exists with a given ISBN
-
         if (authors != null) {
-            Toast.makeText(getActivity(), authors.toString(), Toast.LENGTH_SHORT).show();
             String[] authorsArr = authors.split(",");
             ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
             ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",", "\n"));
@@ -132,13 +130,11 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
             String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
             ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
 
-            if (rootView.findViewById(R.id.right_container) != null) {
-                rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
-            }
-        } else {
-            Toast.makeText(getActivity(), "No book exists with the given ISBN!", Toast.LENGTH_SHORT).show();
+//            Removing custom back button - Against Android Design Principles
+//            if (rootView.findViewById(R.id.right_container) != null) {
+//                rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
+//            }
         }
-
     }
 
     @Override
