@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.view.MenuItemCompat;
@@ -114,20 +115,28 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
         ((TextView) rootView.findViewById(R.id.fullBookDesc)).setText(desc);
 
         String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
-        String[] authorsArr = authors.split(",");
-        ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
-        ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",", "\n"));
-        String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-        if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
-            new DownloadImage((ImageView) rootView.findViewById(R.id.fullBookCover)).execute(imgUrl);
-            rootView.findViewById(R.id.fullBookCover).setVisibility(View.VISIBLE);
-        }
 
-        String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
-        ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
+        // App may crash here if no book exists with a given ISBN
 
-        if (rootView.findViewById(R.id.right_container) != null) {
-            rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
+        if (authors != null) {
+            Toast.makeText(getActivity(), authors.toString(), Toast.LENGTH_SHORT).show();
+            String[] authorsArr = authors.split(",");
+            ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
+            ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",", "\n"));
+            String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
+            if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
+                new DownloadImage((ImageView) rootView.findViewById(R.id.fullBookCover)).execute(imgUrl);
+                rootView.findViewById(R.id.fullBookCover).setVisibility(View.VISIBLE);
+            }
+
+            String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
+            ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
+
+            if (rootView.findViewById(R.id.right_container) != null) {
+                rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
+            }
+        } else {
+            Toast.makeText(getActivity(), "No book exists with the given ISBN!", Toast.LENGTH_SHORT).show();
         }
 
     }

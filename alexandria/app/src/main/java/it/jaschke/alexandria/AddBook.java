@@ -172,20 +172,28 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         ((TextView) rootView.findViewById(R.id.bookSubTitle)).setText(bookSubTitle);
 
         String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
-        String[] authorsArr = authors.split(",");
-        ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
-        ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",", "\n"));
-        String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-        if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
-            new DownloadImage((ImageView) rootView.findViewById(R.id.bookCover)).execute(imgUrl);
-            rootView.findViewById(R.id.bookCover).setVisibility(View.VISIBLE);
+
+        // App may crash here if no book exists with a given ISBN
+
+        if (authors != null) {
+
+            String[] authorsArr = authors.split(",");
+            ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
+            ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",", "\n"));
+            String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
+            if (Patterns.WEB_URL.matcher(imgUrl).matches()) {
+                new DownloadImage((ImageView) rootView.findViewById(R.id.bookCover)).execute(imgUrl);
+                rootView.findViewById(R.id.bookCover).setVisibility(View.VISIBLE);
+            }
+
+            String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
+            ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
+
+            rootView.findViewById(R.id.save_button).setVisibility(View.VISIBLE);
+            rootView.findViewById(R.id.delete_button).setVisibility(View.VISIBLE);
+        } else {
+            Toast.makeText(getActivity(), "No book exists with the given ISBN!", Toast.LENGTH_SHORT).show();
         }
-
-        String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
-        ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
-
-        rootView.findViewById(R.id.save_button).setVisibility(View.VISIBLE);
-        rootView.findViewById(R.id.delete_button).setVisibility(View.VISIBLE);
     }
 
     @Override
