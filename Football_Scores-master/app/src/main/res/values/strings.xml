@@ -42,4 +42,31 @@
     <string name="PRIMERA_DIVISION">358</string>
     <string name="BUNDESLIGA">351</string>
 
+    <string name="BUNDESLIGA1">394</string>
+    <string name="BUNDESLIGA2">395</string>
+    <string name="LIGUE1">396</string>
+    <string name="LIGUE2">397</string>
+    <string name="PREMIER_LEAGUE2">398</string>
+    <string name="PRIMERA_DIVISION2">399</string>
+    <string name="SEGUNDA_DIVISION">400</string>
+    <string name="SERIE_A2">401</string>
+    <string name="PRIMERA_LIGA">402</string>
+    <string name="Bundesliga3">403</string>
+    <string name="EREDIVISIE">404</string>
+
+    <string name="SEASON_LINK">http://api.football-data.org/alpha/soccerseasons/</string>
+    <string name="MATCH_LINK">3http://api.football-data.org/alpha/fixtures/95</string>
+    <string name="FIXTURES">fixtures</string>
+    <string name="LINKS">_links</string>
+    <string name="SOCCER_SEASON">soccerseason</string>
+    <string name="SELF">self</string>
+    <string name="MATCH_DATE">date</string>
+    <string name="HOME_TEAM">homeTeamName</string>
+    <string name="AWAY_TEAM">awayTeamName</string>
+    <string name="RESULT">result</string>
+    <string name="HOME_GOALS">goalsHomeTeam</string>
+    <string name="AWAY_GOALS">goalsAwayTeam</string>
+    <string name="MATCH_DAY">matchday</string>
+
+
 </resources>
