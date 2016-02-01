@@ -246,12 +246,12 @@ public class myFetchService extends IntentService {
                     values.add(match_values);
 
                     // Updating widgets here
-                    Log.d("******", "updating widgets");
+//                    Log.d("******", "updating widgets");
                     AppWidgetManager manager = AppWidgetManager.getInstance(this);
                     int[] appWidgetIds = manager.getAppWidgetIds(new ComponentName(this, WidgetProvider.class));
                     WidgetProvider.update(getPackageName(), manager, appWidgetIds, Home, Away, Home_goals, Away_goals,
                             mTime);
-                    Log.d("******", "updating widgets complete");
+//                    Log.d("******", "updating widgets complete");
                 }
             }
             int inserted_data = 0;

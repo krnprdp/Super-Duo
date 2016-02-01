@@ -35,7 +35,7 @@ public class WidgetProvider extends AppWidgetProvider {
     public static void update(String packageName, AppWidgetManager appWidgetManager, int[] appWidgetIds, String homeName,
                               String awayName, String homeScore, String awayScore,
                               String matchTime) {
-        Log.d("******", "here");
+//        Log.d("******", "here");
         final int count = appWidgetIds.length;
         for (int i = 0; i < count; i++) {
             int widgetId = appWidgetIds[i];
