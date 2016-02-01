@@ -68,5 +68,11 @@
     <string name="AWAY_GOALS">goalsAwayTeam</string>
     <string name="MATCH_DAY">matchday</string>
 
+    <string name="home_name">Home Name</string>
+    <string name="home_icon">Home Icon</string>
+    <string name="away_name">Away Name</string>
+    <string name="away_icon">Away Icon</string>
+    <string name="time">Time</string>
+    <string name="scores">Scores</string>
 
 </resources>
