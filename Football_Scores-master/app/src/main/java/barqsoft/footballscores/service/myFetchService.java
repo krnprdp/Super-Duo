@@ -1,6 +1,8 @@
 package barqsoft.footballscores.service;
 
 import android.app.IntentService;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +26,7 @@ import java.util.Vector;
 
 import barqsoft.footballscores.DatabaseContract;
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.WidgetProvider;
 
 /**
  * Created by yehya khaled on 3/2/2015.
@@ -241,6 +244,14 @@ public class myFetchService extends IntentService {
                     //Log.v(LOG_TAG,Away_goals);
 
                     values.add(match_values);
+
+                    // Updating widgets here
+                    Log.d("******", "updating widgets");
+                    AppWidgetManager manager = AppWidgetManager.getInstance(this);
+                    int[] appWidgetIds = manager.getAppWidgetIds(new ComponentName(this, WidgetProvider.class));
+                    WidgetProvider.update(getPackageName(), manager, appWidgetIds, Home, Away, Home_goals, Away_goals,
+                            mTime);
+                    Log.d("******", "updating widgets complete");
                 }
             }
             int inserted_data = 0;
